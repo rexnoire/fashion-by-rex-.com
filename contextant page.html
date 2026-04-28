@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Fashion Parade — Contestants | University Event</title>
+
+  <link rel="stylesheet" href="/css/contestant page.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Contestants</h1>
+    <div class="sub">Select and support your favorite contestant</div>
+  </div>
+
+  <!-- Contestants Grid -->
+  <div class="contestants-grid" id="contestantsGrid"></div>
+
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>© 2026 University Students Week — Fashion Parade</p>
+  </div>
+</footer>
+
+<script>
+  // Contestants list
+  const contestantsList = [
+    "Elena Moore",
+    "James Park",
+    "Sophia Laurent",
+    "Marcus Velez",
+    "Isabella Rossi",
+    "Oliver Chen",
+    "Zara Adeyemi",
+    "Liam O'Connor",
+    "Camille Dupont",
+    "Nathan Kim"
+  ];
+
+  function buildContestantsGrid() {
+    const gridContainer = document.getElementById('contestantsGrid');
+    gridContainer.innerHTML = '';
+
+    contestantsList.forEach(name => {
+
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      const imageDiv = document.createElement('div');
+      imageDiv.className = 'card__image';
+      imageDiv.innerHTML = `
+        <div class="placeholder-icon">
+          <span>portrait</span>
+        </div>
+      `;
+
+      const infoDiv = document.createElement('div');
+      infoDiv.className = 'card__info';
+
+      const nameDiv = document.createElement('div');
+      nameDiv.className = 'card__name';
+      nameDiv.textContent = name;
+
+      const voteButton = document.createElement('button');
+      voteButton.className = 'vote-btn';
+      voteButton.textContent = 'Vote';
+
+      // ✅ FIXED LINKING TO votingpage.html
+      voteButton.addEventListener('click', () => {
+        const encodedName = encodeURIComponent(name);
+        window.location.href = `votingpage.html?name=${encodedName}`;
+      });
+
+      infoDiv.appendChild(nameDiv);
+      infoDiv.appendChild(voteButton);
+
+      card.appendChild(imageDiv);
+      card.appendChild(infoDiv);
+
+      gridContainer.appendChild(card);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', buildContestantsGrid);
+</script>
+
+</body>
+</html>
